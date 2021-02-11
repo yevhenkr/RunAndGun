@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    // Start is called before the first frame update;;kkk
+    // Start is called before the first frame update;;kkkll
     void Start()
     {
         rb.velocity = transform.right * speed;
