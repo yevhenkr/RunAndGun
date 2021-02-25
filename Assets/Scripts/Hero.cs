@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 
+
+public delegate void Dead();
 public class Hero : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
     [SerializeField] private float lives = 3f;
     [SerializeField] private float jumpForce = 1.1f;
+    
+    public Dead OnDied;
 
     private bool isGrounded = false;
 
@@ -33,6 +37,7 @@ public class Hero : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        
     }
 
     private void FixedUpdate()
@@ -119,6 +124,8 @@ public class Hero : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+        OnDied?.Invoke();
+
     }
     
     /// <summary>

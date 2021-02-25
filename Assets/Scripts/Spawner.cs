@@ -9,13 +9,12 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Pailsade;
+    [SerializeField] private LevelController LevelController ;
     [SerializeField] private int countPalisade;
     [SerializeField] private int maebyPointSpawn;
     private  Vector3 pailsadePos;
     private List<int> array = new List<int>();
-/// <summary>
-/// /
-/// </summary>
+    public List<GameObject> pailsadeList = new List<GameObject>();
    
     private void Awake()
     {
@@ -28,9 +27,14 @@ public class Spawner : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        Instantiate(Player);
+        var go =Instantiate(Player);
+        go.GetComponent<Hero>().OnDied += LevelController.LevelFinish;
     }
-
+//
+//    public void Test()
+//    {
+//        Debug.Log("Test");
+//    }
     public void SpawnPailsade()
     {
         MixList();
@@ -38,7 +42,8 @@ public class Spawner : MonoBehaviour
         {
             var temp = pailsadePos.x;
            pailsadePos.x += array[j];
-            Instantiate(Pailsade, pailsadePos, Quaternion.identity);
+            
+            pailsadeList.Add(Instantiate(Pailsade, pailsadePos, Quaternion.identity));
             pailsadePos.x = temp;
         }
     }
