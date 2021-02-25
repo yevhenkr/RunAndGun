@@ -2,7 +2,9 @@
 
 public class Palisade : Enemy
 {
+    
     public int Health;
+    public GameObject Coin;
 
     public override void Die()
     {
@@ -14,6 +16,7 @@ public class Palisade : Enemy
         Health -= damage;
         if (Health <= 0)
         {
+            Instantiate(Coin, transform.position, Quaternion.identity);
             Die();
         }
     }

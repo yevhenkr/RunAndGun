@@ -97,6 +97,7 @@ MonoBehaviour:
   damegeForTouch: 1
   tagHero: Hero
   Health: 5
+  Coin: {fileID: 5246540837099084134, guid: 1c21795b9d1904f47868a5bbc5577036, type: 3}
 --- !u!114 &5853861412673632936
 MonoBehaviour:
   m_ObjectHideFlags: 0
