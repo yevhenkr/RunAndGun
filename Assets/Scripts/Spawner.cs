@@ -30,11 +30,7 @@ public class Spawner : MonoBehaviour
         var go =Instantiate(Player);
         go.GetComponent<Hero>().OnDied += LevelController.LevelFinish;
     }
-//
-//    public void Test()
-//    {
-//        Debug.Log("Test");
-//    }
+    
     public void SpawnPailsade()
     {
         MixList();
