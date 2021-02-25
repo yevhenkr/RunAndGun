@@ -5,9 +5,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 5f;
      public int damage = 1;
 
-    public Rigidbody2D rb;
+    public Rigidbody2D rb;//todo privet
 
-    // Start is called before the first frame update;;kkkll
+    // Start is called before the first frame update;;kkkllkkff
     void Start()
     {
         rb.velocity = transform.right * speed;

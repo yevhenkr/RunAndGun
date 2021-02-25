@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damegeForTouch: 1
   tagHero: Hero
-  Health: 3
+  Health: 5
 --- !u!114 &5853861412673632936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfcc6a47f375eaa44b768a20036bb208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthMax: 5
+  HealthMax: 0
   healthTexture: {fileID: 2800000, guid: 98d1fbfededbbf84bb8287648e9679bc, type: 3}
   xOffSet: 1
   yOffSet: 12

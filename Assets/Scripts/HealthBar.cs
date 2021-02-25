@@ -8,15 +8,17 @@ public class HealthBar : MonoBehaviour
     private float currentHealth;
     void Start()
     {
+        HealthMax = GetComponent<Palisade>().Health;
         currentHealth = HealthMax;
+        
         barBGWidth = maxBarWidth+2;
     }
 
-    void Update()
+   
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            GetDamage(5);
+        if (collision.gameObject.tag == "Bullet")
+        {  GetDamage(collision.gameObject.GetComponent<Bullet>().damage);
             ChangeBarLives();
         }
     }
