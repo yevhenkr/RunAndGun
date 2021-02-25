@@ -2,12 +2,13 @@
 
 
 public delegate void Dead();
+
 public class Hero : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
     [SerializeField] private float lives = 3f;
     [SerializeField] private float jumpForce = 1.1f;
-    
+
     public Dead OnDied;
 
     private bool isGrounded = false;
@@ -37,7 +38,6 @@ public class Hero : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
-        
     }
 
     private void FixedUpdate()
@@ -69,6 +69,7 @@ public class Hero : MonoBehaviour
         {
             State = States.run;
         }
+
         float move = Input.GetAxis("Horizontal");
         //Vector3 dir = transform.right * Input.GetAxis("Horizontal");
         transform.position = Vector3.MoveTowards(transform.position, transform.position + (new Vector3(move, 0f, 0f)),
@@ -125,41 +126,26 @@ public class Hero : MonoBehaviour
     {
         Destroy(gameObject);
         OnDied?.Invoke();
-
     }
-    
-    /// <summary>
-    /// Задать/Получить состояние
-    /// </summary>
+
+    /// <summary> Задать/Получить состояние</summary>
     private States State
     {
         get { return (States) anim.GetInteger("State"); }
         set { anim.SetInteger("State", (int) value); } //todo Проверка на вход значения
     }
 
-    /// <summary>
-    /// Столкновение с монтой
-    /// </summary>
     private void OnCollisionEnter2D(Collision2D collider)
     {
-        
-            if (collider.gameObject.tag == "Coin")
-            {
-                CoinCounter.Instance.AddCoin();
-            }
-            if (collider.gameObject.GetComponent<Enemy>())
-            {
-                Debug.Log("Enemy");
-                Damage(1);
-            }
+        if (collider.gameObject.GetComponent<Enemy>())
+        {
+            Debug.Log("Enemy");
+            Damage(1);
         }
-       
-    
+    }
 }
 
-/// <summary>
-/// enum типов состояний
-/// </summary>
+/// <summary>enum типов состояний</summary>
 public enum States
 {
     idle,
