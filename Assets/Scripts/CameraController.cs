@@ -1,51 +1,65 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float offset;
-    private Transform target;
-    private Vector3 posTarget;
+    [SerializeField]
+    private float dumping;
+    private Vector2 ofset = new Vector2(2f,1f);
+    public bool isLeft;
+    private Transform player;
+    private int lastX;
+
 
     private void Start()
     {
-        if (!target)
+        CameraRestart();
+    }
+
+    public void CameraRestart()
+    {
+        ofset = new Vector2(Math.Abs(ofset.x), ofset.y);
+        FindPlayer(isLeft);
+    }
+
+    public void FindPlayer(bool playerIsLeft)
+    {
+        player = GameObject.FindGameObjectWithTag("Hero").transform;
+        lastX = Mathf.RoundToInt(player.position.x);
+        if (playerIsLeft)
         {
-            target = FindObjectOfType<Hero>().transform;//todo вслучае вдвух трёх
+            transform.position = new Vector3(player.position.x - ofset.x, player.position.y - ofset.y, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(player.position.x + ofset.x, player.position.y + ofset.y, transform.position.z);
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (target)
+        Debug.Log("Player = " + player);
+        if (player)
         {
             
-            posTarget = target.position;
-            posTarget.z = -10f;
-            PushButton();
-        }
-    }
+            Debug.Log("111111");
+            int currentX = Mathf.RoundToInt(player.position.x);
+            if (currentX > lastX) isLeft = false;
+            else if (currentX < lastX) isLeft = true;
+            lastX = Mathf.RoundToInt(player.position.x);
 
-    public void PushButton()
-    {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            if (transform.position.x + offset < posTarget.x)
+            Vector3 target;
+            if (isLeft)
             {
-                MoveToTarget();
+                target = new Vector3(player.position.x - ofset.x, player.position.y + ofset.y, transform.position.z);
             }
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (transform.position.x > posTarget.x + offset)
+            else
             {
-                MoveToTarget();
+                target = new Vector3(player.position.x + ofset.x, player.position.y + ofset.y, transform.position.z);
             }
-        }
-    }
 
-    public void MoveToTarget()
-    {
-        transform.position = Vector3.Lerp(transform.position, posTarget, Time.deltaTime);
+            Vector3 currentPosition = Vector3.Lerp(transform.position, target, dumping * Time.deltaTime);
+            transform.position = currentPosition;
+        }
     }
 }

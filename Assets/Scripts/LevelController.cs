@@ -24,13 +24,16 @@ public class LevelController : MonoBehaviour
         StartCoroutine(OnObj());
         IEnumerator OnObj()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.01f);
             levelCamera.enabled = true;
+            levelCamera.GetComponent<CameraController>().CameraRestart();
         }
     }
     
     public void LevelFinish()
     {
+        
+        levelCamera.enabled = false;
         DestroyEnemy();
         gameController.ShowGameOver();
         gameController.OpenMainMenu();

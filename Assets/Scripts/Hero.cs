@@ -139,7 +139,6 @@ public class Hero : MonoBehaviour
     {
         if (collider.gameObject.GetComponent<Enemy>())
         {
-            Debug.Log("Enemy");
             Damage(1);
         }
     }
