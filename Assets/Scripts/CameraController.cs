@@ -38,11 +38,8 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Player = " + player);
         if (player)
         {
-            
-            Debug.Log("111111");
             int currentX = Mathf.RoundToInt(player.position.x);
             if (currentX > lastX) isLeft = false;
             else if (currentX < lastX) isLeft = true;

@@ -21,9 +21,6 @@ public class Inventory : MonoBehaviour
             index = 0;
         }
 
-        Debug.Log("Item name: " + inventory[index].name);
-        Debug.Log ("Attack power: " + inventory[index].attack);
-
         switch(inventory[index].type)
         {
             case ItemType.Axe: 
@@ -43,8 +40,6 @@ public class Inventory : MonoBehaviour
                 break;
         }
         Debug.Log("Item price: " + inventory[index].GetPrice());
-        
-        
         index ++;
     }
 }

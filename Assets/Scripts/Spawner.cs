@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
-using Random = System.Random;
-
 
 public class Spawner : MonoBehaviour
 {

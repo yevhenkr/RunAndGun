@@ -71,7 +71,6 @@ public class Hero : MonoBehaviour
         }
 
         float move = Input.GetAxis("Horizontal");
-        //Vector3 dir = transform.right * Input.GetAxis("Horizontal");
         transform.position = Vector3.MoveTowards(transform.position, transform.position + (new Vector3(move, 0f, 0f)),
             speed * Time.deltaTime);
         if (move > 0 && !isFacingRight)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-
-
 
 public class LevelController : MonoBehaviour
 {
@@ -10,18 +7,21 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameController gameController;
     [SerializeField] private Spawner Spawner;
     [SerializeField] private CoinSpawner coinSpawner;
-
+    public bool playerWin = false;
 
     public void LevelStart()
     {
+        playerWin = false;
         Spawner.SpawnPlayer();
         Spawner.SpawnPailsade();
         CameraStart();
         coinSpawner.CoinSpawn();
     }
+
     public void CameraStart()
     {
         StartCoroutine(OnObj());
+
         IEnumerator OnObj()
         {
             yield return new WaitForSeconds(0.01f);
@@ -29,15 +29,20 @@ public class LevelController : MonoBehaviour
             levelCamera.GetComponent<CameraController>().CameraRestart();
         }
     }
-    
-    public void LevelFinish()
+
+    public void LevelFinish() 
     {
-        
         levelCamera.enabled = false;
         DestroyEnemy();
-        gameController.ShowGameOver();
+        if (playerWin)
+        {
+            gameController.ShowWin();
+        }
+        else
+        {
+            gameController.ShowGameOver();
+        }
         gameController.OpenMainMenu();
-        
     }
 
     private void DestroyEnemy()
@@ -46,6 +51,7 @@ public class LevelController : MonoBehaviour
         {
             Destroy(VARIABLE);
         }
+
         Spawner.pailsadeList.Clear();
     }
 }

@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject MainMenu;
     [SerializeField] private RectTransform GameOverImage;
+    [SerializeField] private RectTransform YouWinImage;
     [SerializeField] private float timeShowGameOver;
     
     public LevelController levelController;
@@ -45,8 +46,23 @@ public class GameController : MonoBehaviour
             GameOverImage.DOAnchorPos(new Vector2(0,-y), timeShowGameOver);
             yield return new WaitForSeconds(timeShowGameOver);
             GameOverImage.DOAnchorPos(new Vector2(0,y), 0);
-
+        }
+    }
+    public void ShowWin()
+    {
+        var y = YouWinImage.anchoredPosition.y;
+        YouWinImage.DOAnchorPos(Vector2.zero, timeShowGameOver);
+        StartCoroutine(OnObj());
+        IEnumerator OnObj()
+        {
+            yield return new WaitForSeconds(timeShowGameOver);
+            YouWinImage.DOAnchorPos(new Vector2(0,-y), timeShowGameOver);
             
+            yield return new WaitForSeconds(timeShowGameOver);
+            YouWinImage.DOAnchorPos(new Vector2(0,y), 0);
+            if (GameObject.FindGameObjectWithTag("Hero") != null)
+            {
+            }
         }
     }
 }

@@ -2,7 +2,6 @@
 
 public class WalkinMonster : Entity
 {
-//    private float speed = 3.5f;
     private Vector3 dir;
     private SpriteRenderer sprite;
 
